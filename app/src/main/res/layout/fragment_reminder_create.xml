@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/addReminderScroll"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    android:padding="8dp"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Title Field -->
+        <FrameLayout
+            android:id="@+id/titleContainer"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/textContainer"
+            app:layout_constraintWidth_percent="0.2">
+            <EditText
+                android:id="@+id/reminderTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/title_hint"
+                android:paddingEnd="32dp"
+                android:inputType="textCapSentences|textNoSuggestions" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/titleSpeechButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:contentDescription="@string/speak_title_desc" />
+        </FrameLayout>
+
+        <!-- Text Field -->
+        <FrameLayout
+            android:id="@+id/textContainer"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toEndOf="@id/titleContainer"
+            app:layout_constraintEnd_toStartOf="@id/saveReminder"
+            app:layout_constraintTop_toTopOf="parent">
+            <EditText
+                android:id="@+id/reminderText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/text_hint"
+                android:paddingEnd="32dp"
+                android:scrollbars="vertical"
+                android:overScrollMode="always"
+                android:maxLines="3"
+                android:inputType="textCapSentences|textNoSuggestions" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/textSpeechButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:contentDescription="@string/speak_text_desc" />
+        </FrameLayout>
+
+        <!-- Save + Hide Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveReminder"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="@string/save"
+            android:background="@drawable/black_button_background"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/hideKeyboardButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hideKeyboardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="@string/hide_keyboard"
+            android:background="@drawable/black_button_background"
+            android:textColor="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- TTS Field -->
+        <FrameLayout
+            android:id="@+id/ttsContainer"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintTop_toBottomOf="@id/titleContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/recordColumn"
+            android:layout_marginTop="4dp">
+            <EditText
+                android:id="@+id/reminderTts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:hint="@string/tts_hint"
+                android:paddingEnd="32dp"
+                android:textStyle="bold"
+                android:scrollbars="vertical"
+                android:overScrollMode="always"
+                android:maxLines="3"
+                android:inputType="textCapSentences|textMultiLine|textNoSuggestions" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ttsSpeechButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end|center_vertical"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:contentDescription="@string/speak_tts_desc" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dateButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/select_date"
+            android:background="@drawable/black_button_background"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/ttsContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/recordColumn" />
+
+        <!-- Photo and Audio Section -->
+        <LinearLayout
+            android:id="@+id/recordColumn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="@id/ttsContainer"
+            app:layout_constraintStart_toEndOf="@id/ttsContainer"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/photoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="@drawable/black_button_background"
+                android:text="@string/photo"
+                android:textColor="@android:color/white" />
+
+            <LinearLayout
+                android:id="@+id/photoInfoGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/photoInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photo_added"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/deletePhotoButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/black_button_background"
+                    android:text="@string/delete"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+              <androidx.appcompat.widget.AppCompatButton
+                  android:id="@+id/recordButton"
+                  android:layout_width="wrap_content"
+                  android:layout_height="48dp"
+                  android:layout_marginTop="8dp"
+                  android:background="@drawable/black_button_background"
+                  android:text="@string/record"
+                  android:textColor="@android:color/white"
+                  android:visibility="gone" />
+
+              <TextView
+                  android:id="@+id/recordingIndicator"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="4dp"
+                  android:text="@string/recording_indicator"
+                  android:textStyle="bold"
+                  android:visibility="gone" />
+
+              <LinearLayout
+                  android:id="@+id/recordInfoGroup"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/recordInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recording_info"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/deleteRecordButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/black_button_background"
+                    android:text="@string/delete_recording"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Add Time Label and Button -->
+        <TextView
+            android:id="@+id/timesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/times_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateButton"
+            app:layout_constraintBottom_toTopOf="@id/addTimeButton" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addTimeButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/time_button_background"
+            android:text="@string/plus"
+            android:textColor="@android:color/white"
+            android:contentDescription="@string/add_time_desc"
+            app:layout_constraintTop_toBottomOf="@id/timesLabel"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Times Flow (to the right of add button) -->
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/timesFlow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            app:flow_horizontalGap="2dp"
+            app:flow_horizontalStyle="spread_inside"
+            app:flow_maxElementsWrap="5"
+            app:flow_verticalGap="2dp"
+            app:flow_wrapMode="aligned"
+            app:layout_constraintTop_toTopOf="@id/addTimeButton"
+            app:layout_constraintStart_toEndOf="@id/addTimeButton"
+            app:layout_constraintEnd_toStartOf="@id/recordColumn" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/timeBarrier"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="addTimeButton,timesFlow" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dayContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/checkbox_container_background"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            app:layout_constraintEnd_toStartOf="@id/recordColumn"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timeBarrier">
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/daysFlow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="dayMon,dayTue,dayWed,dayThu,dayFri,daySat,daySun,promptTypeCheck,repeatNoCheck,autoAnswerCheck,priorityCheck,alarmCheck,repeatIntervalCheck"
+                app:flow_horizontalGap="8dp"
+                app:flow_maxElementsWrap="6"
+                app:flow_verticalGap="8dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <CheckBox
+                android:id="@+id/dayMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_mon" />
+
+            <CheckBox
+                android:id="@+id/dayTue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_tue" />
+
+            <CheckBox
+                android:id="@+id/dayWed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_wed" />
+
+            <CheckBox
+                android:id="@+id/dayThu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_thu" />
+
+            <CheckBox
+                android:id="@+id/dayFri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_fri" />
+
+            <CheckBox
+                android:id="@+id/daySat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_sat" />
+
+            <CheckBox
+                android:id="@+id/daySun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/day_sun" />
+
+            <CheckBox
+                android:id="@+id/promptTypeCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/prompt_yes_no" />
+
+            <CheckBox
+                android:id="@+id/repeatNoCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/repeat_if_no" />
+
+            <CheckBox
+                android:id="@+id/autoAnswerCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:text="@string/auto_answer_unanswered" />
+
+            <CheckBox
+                android:id="@+id/priorityCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:text="@string/priority_reminder" />
+
+            <CheckBox
+                android:id="@+id/alarmCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:checked="true"
+                android:text="@string/play_alarm_sound" />
+
+            <CheckBox
+                android:id="@+id/repeatIntervalCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:text="@string/repeat_every_x_hours" />
+
+            <TextView
+                android:id="@+id/repeatIntervalSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textStyle="italic"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/repeatIntervalCheck"
+                app:layout_constraintTop_toBottomOf="@id/repeatIntervalCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dayContainer"
+            app:layout_constraintVertical_bias="0.0">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/previewButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/black_button_background"
+                android:text="@string/preview_reminder"
+                android:textColor="@android:color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/black_button_background"
+                android:text="@string/back_caps"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

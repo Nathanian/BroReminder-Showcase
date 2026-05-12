@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialogRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:padding="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/innerBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/dialog_background"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Vertikale Guideline bei 50% -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineVertical50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <!-- Horizontale Guideline bei 50% -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineHorizontal50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <!-- Bild: oben links -->
+        <ImageView
+            android:id="@+id/promptImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guidelineVertical50"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal50"
+            android:contentDescription="Image preview" />
+
+        <!-- Text: oben rechts -->
+        <TextView
+            android:id="@+id/promptText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="Testitest"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:maxLines="5"
+            app:layout_constraintStart_toStartOf="@id/guidelineVertical50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal50" />
+
+        <!-- JA-Button: unten links -->
+        <Button
+            android:id="@+id/buttonYes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/yes_button"
+            android:text="JA"
+            android:textColor="@android:color/white"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:contentDescription="Ja"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guidelineVertical50"
+            app:layout_constraintTop_toTopOf="@id/guidelineHorizontal50"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- NEIN-Button: unten rechts -->
+        <Button
+            android:id="@+id/buttonNo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/no_button"
+            android:text="NEIN"
+            android:textColor="@android:color/white"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:contentDescription="Nein"
+            app:layout_constraintStart_toStartOf="@id/guidelineVertical50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidelineHorizontal50"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

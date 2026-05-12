@@ -1,0 +1,6 @@
+<!-- res/drawable/time_button_shape.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="#4CAF50" /> <!-- Grün -->
+    <corners android:radius="10dp" />
+    <padding android:left="12dp" android:top="6dp" android:right="12dp" android:bottom="6dp" />
+</shape>
