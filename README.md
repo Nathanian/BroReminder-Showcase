@@ -75,13 +75,3 @@ Placeholder values are used where required.
 Jan Herold
 Application Developer / Android & Robotics Development
 
-
-## Scope
-
-This codebase is intended for:
-
-- architecture review
-- portfolio/showcase use
-- feature demonstration
-
-It is **not** intended to expose any production infrastructure, customer data, or private deployment details.
