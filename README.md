@@ -1,44 +1,80 @@
-# BroReminder (Sanitized Showcase Edition)
+# BroReminder Showcase
 
-This repository is a **public, sanitized demo/showcase version** of an Android reminder app.
+A showcase version of my Android reminder and voice-assistant application developed in Java for Android 7 devices.
 
-It preserves the core architecture and feature flow (reminders, overlays, reports, voice-assisted input), while removing or replacing confidential and environment-specific values.
+This project combines reminders, overlay-based interactions, voice commands, speech processing, and background services into a lightweight Android application designed for older hardware and kiosk-like systems.
 
-## Sanitization notes
+## Features
 
-The following categories were sanitized for public sharing:
+* Voice-triggered reminder creation
+* Overlay-based UI interactions
+* Background reminder scheduling
+* Daily report generation
+* Notification and alarm system
+* Runtime voice command handling
+* Offline-oriented architecture
+* Android 7 (API 24/25) compatibility
+* Lightweight service-focused design for low-end hardware
 
-- hardcoded SMTP/infra endpoints and credentials
-- embedded secret-like constants
-- verbose logs that exposed auth details
-- private export artifacts and bundled internal snapshots
+## Technical Highlights
 
-Placeholders are used where configuration is required:
+* Java-based Android application
+* Fragment-based UI architecture
+* Foreground/background Android services
+* Broadcast receivers for scheduled events
+* Runtime overlay management
+* Modular voice-processing utilities
+* Config-based setup for public showcase version
+* Repository cleaned and sanitized for public demonstration
 
-- `YOUR_SERVER_IP`
-- `YOUR_CLIENT_ID`
-- `YOUR_API_KEY`
-- `YOUR_MQTT_BROKER`
-- `YOUR_TOPIC`
-- `YOUR_CLIENT_ID`
+## Architecture
 
-> Note: This project currently uses SMTP for report email. MQTT placeholders are included for consistency if you extend the app with broker-based messaging.
+The application is structured into multiple modules:
 
-## Required configuration
+* `activities` → Main Android activities
+* `fragments` → UI logic and reminder screens
+* `receiver` → Alarm and scheduled event receivers
+* `reminder` → Reminder storage and scheduling logic
+* `utils` → Overlay and utility services
+* `voice` → Voice processing and command handling
+* `viewmodels` → State and UI data handling
 
-Copy the example file and replace placeholders with your own values:
+## Android Compatibility
 
-- `app/config.example.properties`
+This project was intentionally developed with compatibility for older Android systems in mind, especially Android 7 devices commonly found in embedded systems and robotics environments.
 
-Then wire values into your local build/runtime setup before testing email delivery.
+## Public Showcase Notes
 
-## Build instructions
+This repository is a sanitized showcase/demo version of the original internal project.
 
-Use Android Studio (recommended) or Gradle wrapper:
+The following were removed or replaced:
 
-```bash
-./gradlew assembleDebug
-```
+* Internal infrastructure references
+* Sensitive configuration values
+* Private endpoints and credentials
+* Company-specific assets and setup details
+
+Placeholder values are used where required.
+
+## Tech Stack
+
+* Java
+* Android SDK
+* Android Services
+* Broadcast Receivers
+* Gradle
+
+## Screenshots
+
+<img width="822" height="489" alt="Reminder-erstellen" src="https://github.com/user-attachments/assets/db79035a-9426-4fbb-941e-42a7d2235581" />
+<img width="826" height="490" alt="Main-Screen" src="https://github.com/user-attachments/assets/b1c6af12-079a-4e42-ac2b-556981f57636" />
+<img width="822" height="484" alt="Berichte" src="https://github.com/user-attachments/assets/5d9a0c78-124d-47a5-9948-d758e586f67b" />
+
+## Author
+
+Jan Herold
+Application Developer / Android & Robotics Development
+
 
 ## Scope
 
